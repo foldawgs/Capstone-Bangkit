@@ -12,26 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CineMood"
         tools:targetApi="31">
-
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false" />
         <!-- Activity untuk login -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Activity untuk register -->
+        </activity> <!-- Activity untuk register -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
-
-        <!-- Activity utama -->
+            android:exported="true" /> <!-- Activity utama -->
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
     </application>
+
 </manifest>
