@@ -53,3 +53,25 @@ Film yang sesuai diurutkan berdasarkan popularitas, dan 15 film teratas direkome
 API memberikan respons berupa JSON yang berisi:
 Prediksi Emosi: Emosi yang diprediksi oleh model.
 Rekomendasi Film: Daftar 15 film teratas berdasarkan emosi yang diprediksi.
+
+# DIAGRAM KERJA 
+[User Input (Text)]
+        |
+        v
+[Text Normalization]
+        |
+        v
+[Tokenizer (tokenizer.pkl)]
+        |
+        v
+[Emotion Classification Model (model.tflite)]
+        |
+        v
+[Filter Movies by Emotion (fix_dataset.pkl)]
+        |
+        v
+[Top 15 Movies Recommendation]
+        |
+        v
+[API Response (JSON)]
+
