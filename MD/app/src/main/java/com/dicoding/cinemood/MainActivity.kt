@@ -1,50 +1,64 @@
 package com.dicoding.cinemood
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.dicoding.cinemood.api.ApiClient
+import com.dicoding.cinemood.model.RequestModel
+import com.dicoding.cinemood.model.ResponseModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val etMood = findViewById<EditText>(R.id.etMood)
+        val btnSearch = findViewById<Button>(R.id.btnSearch)
 
-        sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
+        btnSearch.setOnClickListener {
+            val moodText = etMood.text.toString().trim()
+            if (moodText.isEmpty()) {
+                Toast.makeText(this, "Masukkan mood Anda", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-
-        findViewById<Button>(R.id.btnSearch).setOnClickListener {
-            navigateToDashboard()
+            fetchRecommendations(moodText)
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        logoutAndNavigateToLogin()
-    }
+    private fun fetchRecommendations(mood: String) {
+        val request = RequestModel(text = mood)
 
+        ApiClient.instance.getRecommendations(request).enqueue(object : Callback<ResponseModel> {
+            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
+                if (response.isSuccessful) {
+                    val responseData = response.body()
+                    val recommendations = responseData?.recommendations
 
-    private fun navigateToDashboard() {
-        val intent = Intent(this, DashboardActivity::class.java)
-        startActivity(intent)
-    }
+                    val intent = Intent(this@MainActivity, DashboardActivity::class.java)
+                    intent.putParcelableArrayListExtra(
+                        "recommendations",
+                        ArrayList(recommendations)
+                    )
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Gagal mendapatkan rekomendasi",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
 
-
-    private fun logoutAndNavigateToLogin() {
-        sharedPreferences.edit().apply {
-            putBoolean("isLoggedIn", false)
-            remove("token")
-            apply()
-        }
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-        startActivity(intent)
-        finish()
+            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
