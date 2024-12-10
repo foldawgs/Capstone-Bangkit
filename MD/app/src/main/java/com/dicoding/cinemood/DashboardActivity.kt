@@ -1,8 +1,10 @@
 package com.dicoding.cinemood
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.dicoding.cinemood.adapter.MovieAdapter
 import com.dicoding.cinemood.model.Movie
 
 class DashboardActivity : AppCompatActivity() {
@@ -10,14 +12,10 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        val recommendations = intent.getParcelableArrayListExtra<Movie>("recommendations")
+        val recommendations = intent.getParcelableArrayListExtra<Movie>("recommendations") ?: emptyList()
 
-        val tvRecommendations = findViewById<TextView>(R.id.tvRecommendations)
-        if (recommendations != null && recommendations.isNotEmpty()) {
-            val movieTitles = recommendations.joinToString("\n") { "- ${it.title}" }
-            tvRecommendations.text = movieTitles
-        } else {
-            tvRecommendations.text = "Tidak ada rekomendasi film."
-        }
+        val rvMovies = findViewById<RecyclerView>(R.id.rvMovies)
+        rvMovies.layoutManager = LinearLayoutManager(this)
+        rvMovies.adapter = MovieAdapter(recommendations)
     }
 }
