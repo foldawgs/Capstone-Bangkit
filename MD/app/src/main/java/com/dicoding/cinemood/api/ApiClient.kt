@@ -1,10 +1,16 @@
 package com.dicoding.cinemood.api
 
+import android.util.Log
+import com.dicoding.cinemood.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "https://movie-recomendation-api-1032053721297.asia-southeast2.run.app/"
+
+    private val BASE_URL: String = BuildConfig.BASE_URL
+    init {
+        Log.d("ApiClient", "BASE_URL: $BASE_URL")
+    }
 
     val instance: ApiService by lazy {
         Retrofit.Builder()
