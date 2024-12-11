@@ -22,12 +22,20 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvMovieDescription"
+            android:id="@+id/tvPopularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
+        <Button
+            android:id="@+id/btnImdb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="View on IMDb"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

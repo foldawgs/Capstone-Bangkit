@@ -12,10 +12,13 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        val recommendations = intent.getParcelableArrayListExtra<Movie>("recommendations") ?: emptyList()
+        val recommendations = intent.getParcelableArrayListExtra<Movie>("recommendations")
 
         val rvMovies = findViewById<RecyclerView>(R.id.rvMovies)
         rvMovies.layoutManager = LinearLayoutManager(this)
-        rvMovies.adapter = MovieAdapter(recommendations)
+        if (recommendations != null && recommendations.isNotEmpty()) {
+            val adapter = MovieAdapter(recommendations)
+            rvMovies.adapter = adapter
+        }
     }
 }

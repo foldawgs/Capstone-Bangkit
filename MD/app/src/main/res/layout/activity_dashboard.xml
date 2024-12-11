@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Film yang Sesuai"
+        android:text="Recomended Film"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
