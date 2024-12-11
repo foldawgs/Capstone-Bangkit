@@ -2,7 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CineMood" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#171717</item>
+        <item name="colorPrimaryDark">#171717</item>
     </style>
 
     <style name="Theme.CineMood" parent="Base.Theme.CineMood" />
