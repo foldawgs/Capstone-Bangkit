@@ -17,25 +17,26 @@
             android:id="@+id/tvMovieTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingBottom="4dp" />
 
         <TextView
             android:id="@+id/tvPopularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:paddingBottom="8dp" />
 
         <Button
             android:id="@+id/btnImdb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
+            android:backgroundTint="@color/color_logo"
             android:text="View on IMDb"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal" /> <!-- Center tombol secara horizontal -->
     </LinearLayout>
 </androidx.cardview.widget.CardView>

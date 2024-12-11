@@ -2,8 +2,10 @@ package com.dicoding.cinemood
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.cinemood.api.ApiClient
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val etMood = findViewById<EditText>(R.id.etMood)
         val btnSearch = findViewById<Button>(R.id.btnSearch)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar) // Tambahkan ProgressBar
 
         btnSearch.setOnClickListener {
             val moodText = etMood.text.toString().trim()
@@ -28,15 +31,18 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            fetchRecommendations(moodText)
+            fetchRecommendations(moodText, progressBar)
         }
     }
 
-    private fun fetchRecommendations(mood: String) {
+    private fun fetchRecommendations(mood: String, progressBar: ProgressBar) {
+        progressBar.visibility = View.VISIBLE // Tampilkan loading indicator
+
         val request = RequestModel(text = mood)
 
         ApiClient.instance.getRecommendations(request).enqueue(object : Callback<ResponseModel> {
             override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
+                progressBar.visibility = View.GONE // Sembunyikan loading indicator
                 if (response.isSuccessful) {
                     val responseData = response.body()
                     val recommendations = responseData?.recommendations
@@ -57,6 +63,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                progressBar.visibility = View.GONE // Sembunyikan loading indicator
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

@@ -7,18 +7,29 @@
     android:background="@color/black"
     tools:context=".DashboardActivity">
 
+    <ImageView
+        android:id="@+id/top_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/app_logo_desc"
+        android:src="@drawable/logo_transparan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="Recomended Film"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="8dp"
+        android:text="Recommended Film"
+        android:textColor="@color/white"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    app:layout_constraintTop_toBottomOf="@id/top_logo"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMovies"
