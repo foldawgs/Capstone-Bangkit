@@ -10,11 +10,11 @@
     <ImageView
         android:id="@+id/splash_logo"
         android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:contentDescription="@string/app_logo_desc"
-    android:src="@mipmap/logo_transparan"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="200dp"
+        android:contentDescription="@string/app_logo_desc"
+        android:src="@drawable/logo_transparan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

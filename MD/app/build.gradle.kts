@@ -9,7 +9,7 @@ android {
 
     buildFeatures {
         viewBinding = true
-        buildConfig = true
+        buildConfig= true
 
     }
 
