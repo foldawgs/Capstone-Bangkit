@@ -17,7 +17,7 @@
             android:id="@+id/tvMovieTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             android:paddingBottom="4dp" />
@@ -26,7 +26,7 @@
             android:id="@+id/tvPopularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="14sp"
             android:paddingBottom="8dp" />
 
@@ -37,6 +37,6 @@
             android:backgroundTint="@color/color_logo"
             android:text="View on IMDb"
             android:textColor="@color/white"
-            android:layout_gravity="center_horizontal" /> <!-- Center tombol secara horizontal -->
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val etMood = findViewById<EditText>(R.id.etMood)
         val btnSearch = findViewById<Button>(R.id.btnSearch)
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar) // Tambahkan ProgressBar
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         btnSearch.setOnClickListener {
             val moodText = etMood.text.toString().trim()
@@ -36,34 +36,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchRecommendations(mood: String, progressBar: ProgressBar) {
-        progressBar.visibility = View.VISIBLE // Tampilkan loading indicator
+        progressBar.visibility = View.VISIBLE
 
         val request = RequestModel(text = mood)
 
         ApiClient.instance.getRecommendations(request).enqueue(object : Callback<ResponseModel> {
             override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
-                progressBar.visibility = View.GONE // Sembunyikan loading indicator
+                progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
                     val responseData = response.body()
                     val recommendations = responseData?.recommendations
+                    val predictedEmotion = responseData?.predicted_emotion
 
                     val intent = Intent(this@MainActivity, DashboardActivity::class.java)
-                    intent.putParcelableArrayListExtra(
-                        "recommendations",
-                        ArrayList(recommendations)
-                    )
+                    intent.putParcelableArrayListExtra("recommendations", ArrayList(recommendations))
+                    intent.putExtra("predicted_emotion", predictedEmotion)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Gagal mendapatkan rekomendasi",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@MainActivity, "Gagal mendapatkan rekomendasi", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                progressBar.visibility = View.GONE // Sembunyikan loading indicator
+                progressBar.visibility = View.GONE
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
