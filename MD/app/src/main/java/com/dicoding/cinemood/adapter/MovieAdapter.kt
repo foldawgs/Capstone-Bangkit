@@ -5,15 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.dicoding.cinemood.R
 import com.dicoding.cinemood.model.Movie
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 

@@ -46,10 +46,11 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val responseData = response.body()
                     val recommendations = responseData?.recommendations
-                    val predictedEmotion = responseData?.predicted_emotion
+                    val predictedEmotion = responseData?.predictedemotion
 
                     val intent = Intent(this@MainActivity, DashboardActivity::class.java)
-                    intent.putParcelableArrayListExtra("recommendations", ArrayList(recommendations))
+                    intent.putParcelableArrayListExtra("recommendations", ArrayList(recommendations ?: emptyList()))
+
                     intent.putExtra("predicted_emotion", predictedEmotion)
                     startActivity(intent)
                 } else {

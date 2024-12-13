@@ -1,6 +1,6 @@
 package com.dicoding.cinemood.model
 
 data class ResponseModel(
-    val predicted_emotion: String,
+    val predictedemotion: String,
     val recommendations: List<Movie>
 )
